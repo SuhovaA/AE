@@ -53,7 +53,7 @@ sub new ($$$$;@){
             . (join "", map "$_: $hdr{$_}\015\012", keys %hdr)
             . "\015\012"
             . $arg{body};
-			
+
 	my $obj = AE::Simple->new();
 
 	my $w;
@@ -83,11 +83,11 @@ sub new ($$$$;@){
 					my $n2 = index($response, "\n\n");
 					my $status_line = substr($response, 0, $n1);
 					$results{'status-line'} = $status_line;
-					say $status_line;
+					#say $status_line;
 					my $h = substr($response, $n1 + 1, $n2 - $n1 - 1);
 					my $headers = HTTP::Easy::Headers->decode($h);
 					$results{'headers'} = $headers;
-					p $headers;
+					#p $headers;
 					if (defined $headers->{'content-length'} && $headers->{'content-length'} > 0) {
 
 						my $body = substr($response, $n2 + 2);
@@ -99,8 +99,7 @@ sub new ($$$$;@){
 								if (length($body) == $headers->{'content-length'}) {
 									$obj->destroy($p);
 									$results{'body'} = $body;
-									p $status_line;
-									say "return";
+									#p $body
 									$obj->end_loop();
 								}
 							});
