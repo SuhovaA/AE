@@ -53,8 +53,7 @@ sub new ($$$$;@){
             . (join "", map "$_: $hdr{$_}\015\012", keys %hdr)
             . "\015\012"
             . $arg{body};
-
-
+			
 	my $obj = AE::Simple->new();
 
 	my $w;
@@ -109,7 +108,6 @@ sub new ($$$$;@){
 							$results{'body'} = $body;
 							$obj->end_loop();
 						}
-
 					}
 				}
 			});

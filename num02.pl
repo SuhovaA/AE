@@ -6,7 +6,7 @@ use AE::HTTP_request;
 use DDP;
 
 my $method = 'get';
-my $uri = '"https://www.google.com"';
+my $uri = 'https://cloud.mail.ru/public/5xLH/KvEHJdL1X';
 my %arg;
 $arg{'headers'} = {};
 $arg{'body'} = "";
