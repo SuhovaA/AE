@@ -1,0 +1,6 @@
+Revision history for Perl extension AE::Simple.
+
+0.01  Sun Apr 15 15:53:56 2018
+	- original version; created by h2xs 1.23 with options
+		-n AE::Simple -b 5.16.0 -X
+
