@@ -45,10 +45,10 @@ sub new ($$$$;@){
 
 	my %hdr;
 	if (my $hdr = $arg{headers}) {
-      while (my ($k, $v) = each %$hdr) {
-         $hdr{lc $k} = $v;
-      }
-    }
+    	while (my ($k, $v) = each %$hdr) {
+			$hdr{lc $k} = $v;
+		}
+	}
 	my $request = "$method $uri HTTP/1.0\015\012"
             . (join "", map "$_: $hdr{$_}\015\012", keys %hdr)
             . "\015\012"
