@@ -41,12 +41,12 @@ $obj->io($fd_server, "r", sub {
 		sysread($fd_client, my $buf, 1024);
 		say $buf;
 		$obj->destroy($r);
-		my $w;
+		
 		my $ua = LWP::UserAgent->new();
 		my $request = HTTP::Request->new(GET => 'https://cloud.mail.ru/public/5xLH/KvEHJdL1X');
 		my $response = $ua->request($request);
 		my $resp = $response->as_string;
-
+		my $w;
 		$w = $obj->io($fd_client, "w", sub {
 			syswrite($fd_client, $resp);
 			$obj->destroy($w);

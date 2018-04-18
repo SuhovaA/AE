@@ -25,7 +25,7 @@ sub tcp_connect {
 	my ($host, $port) = @_;
 	my $proto = getprotobyname("tcp");
 	socket(my $sock, AF_INET, SOCK_STREAM, $proto) or warn "Error: socket";
-	say $host, $port;
+	#say $host, $port;
 	my $addr = gethostbyname $host;
 	my $sa = sockaddr_in($port, $addr);
 
@@ -38,21 +38,28 @@ sub tcp_connect {
 
 sub new ($$$$;@){
 
-	my ($self, $host, $port, $method, $uri, %arg) = @_;
+	my ($self, $host, $method, $uri, %arg) = @_;
+	
+	my $port = 80;
 	my $sock = tcp_connect($host, $port);
 
 	$method = uc $method;
+	
 
 	my %hdr;
+
 	if (my $hdr = $arg{headers}) {
     	while (my ($k, $v) = each %$hdr) {
 			$hdr{lc $k} = $v;
 		}
 	}
-	my $request = "$method $uri HTTP/1.0\015\012"
+
+	my $request = "$method $uri HTTP/1.1\015\012"
             . (join "", map "$_: $hdr{$_}\015\012", keys %hdr)
             . "\015\012"
             . $arg{body};
+    
+    say "request: ", $request;
 
 	my $obj = AE::Simple->new();
 
@@ -75,8 +82,8 @@ sub new ($$$$;@){
 
 				sysread($sock, my $buf, 1024);
 				$response .= $buf;
-
-				if ($buf =~ /\n\n/) {
+				say $buf;
+				if ($buf =~/\015\12\015\012/) {
 
 					$obj->destroy($r);
 					my $n1 = index($response, "\n");
@@ -107,7 +114,10 @@ sub new ($$$$;@){
 							$results{'body'} = $body;
 							$obj->end_loop();
 						}
+					} else {
+						$obj->end_loop();
 					}
+
 				}
 			});
 		}

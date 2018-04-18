@@ -6,11 +6,11 @@ use AE::HTTP_request;
 use DDP;
 
 my $method = 'get';
-my $uri = 'https://cloud.mail.ru/public/5xLH/KvEHJdL1X';
+my $uri = '/?gfe_rd=cr&dcr=0&ei=IDDXWqOtCs6F3APz6ZOoDg';
 my %arg;
-$arg{'headers'} = {};
+$arg{'headers'} = {Host => "www.google.ru"};
 $arg{'body'} = "";
-my $response = AE::HTTP_request->new("localhost", "8888", $method, $uri, %arg);
+my $response = AE::HTTP_request->new("www.google.ru", $method, $uri, %arg);
 
 p $response->{'status-line'};
 p $response->{'headers'};
