@@ -10,6 +10,7 @@ use Fcntl;
 use AE::Simple;
 use DDP;
 use HTTP::Easy::Headers;
+use HTTP::Easy::Cookies;
 
 require Exporter;
 use AutoLoader qw(AUTOLOAD);
@@ -37,8 +38,8 @@ sub tcp_connect {
 	socket(my $sock, AF_INET, SOCK_STREAM, $proto) or warn "Error: socket";
 	#say $host, $port;
 	my $addr = gethostbyname $host;
-	my $sa = sockaddr_in($port, $addr);
 
+	my $sa = sockaddr_in($port, $addr);
 	my $flags = fcntl($sock, F_GETFL, 0) or die "Can't get flags for the socket: $!\n";
 	$flags = fcntl($sock, F_SETFL, $flags | O_NONBLOCK) or die "Can't set flags for the socket: $!\n";
 
@@ -46,18 +47,17 @@ sub tcp_connect {
 	return $sock;
 }
 
-sub new ($$$$;@){
+sub new ($$$$;$){
 
-	my ($self, $host, $method, $uri, %arg) = @_;
-	
-	my $port = 80;
+	my ($self, $host, $port, $method, $uri, $r_arg) = @_;
+	#my %arg = %$r_arg;
 	my $sock = tcp_connect($host, $port);
 
 	$method = uc $method;
 	
 
 	my %hdr;
-	if (my $hdr = $arg{headers}) {
+	if (my $hdr = $r_arg->{headers}) {
     	while (my ($k, $v) = each %$hdr) {
 			$hdr{lc $k} = $v;
 		}
@@ -66,12 +66,40 @@ sub new ($$$$;@){
 	my $request = "$method $uri HTTP/1.1\015\012"
             . (join "", map "$_: $hdr{$_}\015\012", keys %hdr)
             . "\015\012"
-            . $arg{body};
+            . $r_arg->{body};
     
     say "request: ", $request;
+=begin
+    if (my $c_all = $r_arg->{cookie}) {
+    	%$c_all = () if $c_all->{version} < 1;
+		my @cookie;
+		while (my ($chost, $v) = each %$c_all) {
+			next unless $chost eq substr $host, -length $chost;
+			next unless $chost =~ /^\./;
+
+			while (my ($cpath, $v) = each %$v) {
+				next unless $cpath eq substr $uri, 0, length $cpath;
+
+				while (my ($k, $v) = each %$v) {
+				   #next if $scheme ne "https" && exists $v->{secure};
+				   push @cookie, "$k=$v->{value}";
+				}
+			}
+		}
+
+		$hdr{cookie} = join "; ", @cookie
+		if @cookie;
+	}
+
+	say $hdr{cookie};
+
+	my %ha = % { $r_arg->{cookie} };
+	my $str1 = HTTP::Easy::Headers->encode(%ha, host => 'example.net', path => '/path');
+	say $str1;	
+=cut
+	
 
 	my $obj = AE::Simple->new();
-
 	my $w;
 	my $length = length($request);
 	my $buf = $request;
@@ -104,6 +132,15 @@ sub new ($$$$;@){
 					my $headers = HTTP::Easy::Headers->decode($h);
 					$results{'headers'} = $headers;
 					#p $headers;
+					#p $headers->{'set-cookie'};
+
+					my $cookie_jar = HTTP::Easy::Cookies->decode($headers->{'set-cookie'});
+					#for (keys %$cookie_jar) {
+						#$arg{cookie}{$_} = $cookie_jar->{$_};
+					#}
+					$results{'cookie'} = $cookie_jar;
+					$r_arg->{cookie} = $cookie_jar;
+					
 					if (defined $headers->{'content-length'} && $headers->{'content-length'} > 0) {
 
 						my $body = substr($response, $n2 + 2);
@@ -112,6 +149,7 @@ sub new ($$$$;@){
 							$p = $obj->io($sock, "r", sub {
 								sysread($sock, my $buf, $headers->{'content-length'} - length($body) );
 								$body .= $buf;
+								say $body;
 								if (length($body) == $headers->{'content-length'}) {
 									$obj->destroy($p);
 									$results{'body'} = $body;
@@ -126,11 +164,9 @@ sub new ($$$$;@){
 					} else {
 						$obj->end_loop();
 					}
-
 				}
 			});
 		}
-
 	});
 
 	$obj->io(\*STDIN, "r", sub {

@@ -6,12 +6,18 @@ use AE::HTTP::Request;
 use DDP;
 
 my $method = 'get';
-my $uri = '/?gfe_rd=cr&dcr=0&ei=IDDXWqOtCs6F3APz6ZOoDg';
+my $uri = '/webhp?hl=ru&sa=X&ved=0ahUKEwiuz8mW-sPaAhVI8ywKHQ06BhkQPAgD';
 my %arg;
-$arg{'headers'} = {Host => "www.google.ru"};
+$arg{'headers'} = (Host => 'www.google.ru');
 $arg{'body'} = "";
-my $response = AE::HTTP::Request->new("www.google.ru", $method, $uri, %arg);
+$arg{'cookie'} = (version => '1');
+
+my $response = AE::HTTP::Request->new("www.google.ru", 80, $method, $uri, \%arg);
+
+$response = AE::HTTP::Request->new("www.google.ru", 80, $method, $uri, \%arg);
 
 p $response->{'status-line'};
 p $response->{'headers'};
 p $response->{'body'};
+#p $response->{'cookie'};
+p %arg;
