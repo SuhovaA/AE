@@ -8,9 +8,9 @@ use DDP;
 my $method = 'get';
 my $uri = '/webhp?hl=ru&sa=X&ved=0ahUKEwiuz8mW-sPaAhVI8ywKHQ06BhkQPAgD';
 my %arg;
-$arg{'headers'} = (Host => 'www.google.ru');
+$arg{'headers'} = {host => 'www.google.ru'};
 $arg{'body'} = "";
-$arg{'cookie'} = (version => '1');
+$arg{'cookie'} = {version => '1'};
 
 my $response = AE::HTTP::Request->new("www.google.ru", 80, $method, $uri, \%arg);
 

@@ -68,35 +68,11 @@ sub new ($$$$;$){
             . "\015\012"
             . $r_arg->{body};
     
-    say "request: ", $request;
-=begin
-    if (my $c_all = $r_arg->{cookie}) {
-    	%$c_all = () if $c_all->{version} < 1;
-		my @cookie;
-		while (my ($chost, $v) = each %$c_all) {
-			next unless $chost eq substr $host, -length $chost;
-			next unless $chost =~ /^\./;
+    #say "request: ", $request;
 
-			while (my ($cpath, $v) = each %$v) {
-				next unless $cpath eq substr $uri, 0, length $cpath;
+	$hdr{cookie} = HTTP::Easy::Cookies->encode($r_arg->{cookie}, host => $host, path => $uri);
+	#say $hdr{cookie};
 
-				while (my ($k, $v) = each %$v) {
-				   #next if $scheme ne "https" && exists $v->{secure};
-				   push @cookie, "$k=$v->{value}";
-				}
-			}
-		}
-
-		$hdr{cookie} = join "; ", @cookie
-		if @cookie;
-	}
-
-	say $hdr{cookie};
-
-	my %ha = % { $r_arg->{cookie} };
-	my $str1 = HTTP::Easy::Headers->encode(%ha, host => 'example.net', path => '/path');
-	say $str1;	
-=cut
 	
 
 	my $obj = AE::Simple->new();
@@ -119,7 +95,7 @@ sub new ($$$$;$){
 
 				sysread($sock, my $buf, 1024);
 				$response .= $buf;
-				say $buf;
+				#say $buf;
 				if ($buf =~/\015\12\015\012/) {
 
 					$obj->destroy($r);
@@ -130,7 +106,7 @@ sub new ($$$$;$){
 					#say $status_line;
 					my $h = substr($response, $n1 + 1, $n2 - $n1 - 1);
 					my $headers = HTTP::Easy::Headers->decode($h);
-					$results{'headers'} = $headers;
+					$results{headers} = $headers;
 					#p $headers;
 					#p $headers->{'set-cookie'};
 
@@ -138,7 +114,7 @@ sub new ($$$$;$){
 					#for (keys %$cookie_jar) {
 						#$arg{cookie}{$_} = $cookie_jar->{$_};
 					#}
-					$results{'cookie'} = $cookie_jar;
+					$results{cookie} = $cookie_jar;
 					$r_arg->{cookie} = $cookie_jar;
 					
 					if (defined $headers->{'content-length'} && $headers->{'content-length'} > 0) {
@@ -149,16 +125,16 @@ sub new ($$$$;$){
 							$p = $obj->io($sock, "r", sub {
 								sysread($sock, my $buf, $headers->{'content-length'} - length($body) );
 								$body .= $buf;
-								say $body;
+								#say $body;
 								if (length($body) == $headers->{'content-length'}) {
 									$obj->destroy($p);
-									$results{'body'} = $body;
+									$results{body} = $body;
 									#p $body
 									$obj->end_loop();
 								}
 							});
 						} else {
-							$results{'body'} = $body;
+							$results{body} = $body;
 							$obj->end_loop();
 						}
 					} else {
