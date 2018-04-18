@@ -1,4 +1,4 @@
-package AE::HTTP_request;
+package AE::HTTP::Request;
 
 use 5.016;
 use warnings;
@@ -20,6 +20,16 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(
 );
 our $VERSION = '0.01';
+
+
+=head1 SYNOPSIS
+
+	http_request->new($host, $method, $uri, %arg)
+	%arg = { headers = %headers,
+			body = $body,
+			}
+
+=cut
 
 sub tcp_connect {
 	my ($host, $port) = @_;
@@ -47,7 +57,6 @@ sub new ($$$$;@){
 	
 
 	my %hdr;
-
 	if (my $hdr = $arg{headers}) {
     	while (my ($k, $v) = each %$hdr) {
 			$hdr{lc $k} = $v;
