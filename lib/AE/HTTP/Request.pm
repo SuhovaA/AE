@@ -24,7 +24,7 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-	http_request->new($host, $method, $uri, %arg)
+	AE::HTTP::Request->new($host, $method, $uri, %arg)
 	%arg = { headers = %headers,
 			body = $body,
 			}
