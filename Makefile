@@ -1,7 +1,7 @@
 # This Makefile is for the AE::Simple extension to perl.
 #
 # It was generated automatically by MakeMaker version
-# 7.0401 (Revision: 70401) from the contents of
+# 7.24 (Revision: 72400) from the contents of
 # Makefile.PL. Don't edit this file, edit Makefile.PL instead.
 #
 #       ANY CHANGES MADE HERE WILL BE LOST!
@@ -25,30 +25,30 @@
 
 # --- MakeMaker const_config section:
 
-# These definitions are from config.sh (via /usr/lib/x86_64-linux-gnu/perl/5.22/Config.pm).
+# These definitions are from config.sh (via /usr/local/Cellar/perl/5.26.1/lib/perl5/5.26.1/darwin-thread-multi-2level/Config.pm).
 # They may have been overridden via Makefile.PL or on the command line.
 AR = ar
-CC = x86_64-linux-gnu-gcc
-CCCDLFLAGS = -fPIC
-CCDLFLAGS = -Wl,-E
-DLEXT = so
+CC = cc
+CCCDLFLAGS =  
+CCDLFLAGS =  
+DLEXT = bundle
 DLSRC = dl_dlopen.xs
 EXE_EXT = 
 FULL_AR = /usr/bin/ar
-LD = x86_64-linux-gnu-gcc
-LDDLFLAGS = -shared -L/usr/local/lib -fstack-protector-strong
-LDFLAGS =  -fstack-protector-strong -L/usr/local/lib
-LIBC = libc-2.23.so
+LD = cc
+LDDLFLAGS =  -mmacosx-version-min=10.13 -bundle -undefined dynamic_lookup -L/usr/local/lib -fstack-protector-strong
+LDFLAGS =  -mmacosx-version-min=10.13 -fstack-protector-strong -L/usr/local/lib
+LIBC = 
 LIB_EXT = .a
 OBJ_EXT = .o
-OSNAME = linux
-OSVERS = 3.16.0
-RANLIB = :
-SITELIBEXP = /usr/local/share/perl/5.22.1
-SITEARCHEXP = /usr/local/lib/x86_64-linux-gnu/perl/5.22.1
-SO = so
-VENDORARCHEXP = /usr/lib/x86_64-linux-gnu/perl5/5.22
-VENDORLIBEXP = /usr/share/perl5
+OSNAME = darwin
+OSVERS = 17.0.0
+RANLIB = ranlib
+SITELIBEXP = /usr/local/Cellar/perl/5.26.1/lib/perl5/site_perl/5.26.1
+SITEARCHEXP = /usr/local/Cellar/perl/5.26.1/lib/perl5/site_perl/5.26.1/darwin-thread-multi-2level
+SO = dylib
+VENDORARCHEXP = 
+VENDORLIBEXP = 
 
 
 # --- MakeMaker constants section:
@@ -70,62 +70,62 @@ INST_BIN = blib/bin
 INST_LIB = blib/lib
 INST_MAN1DIR = blib/man1
 INST_MAN3DIR = blib/man3
-MAN1EXT = 1p
-MAN3EXT = 3pm
+MAN1EXT = 1
+MAN3EXT = 3
 INSTALLDIRS = site
 DESTDIR = 
 PREFIX = $(SITEPREFIX)
-PERLPREFIX = /usr
-SITEPREFIX = /usr/local
-VENDORPREFIX = /usr
-INSTALLPRIVLIB = /usr/share/perl/5.22
+PERLPREFIX = /usr/local/Cellar/perl/5.26.1
+SITEPREFIX = /usr/local/Cellar/perl/5.26.1
+VENDORPREFIX = 
+INSTALLPRIVLIB = /usr/local/Cellar/perl/5.26.1/lib/perl5/5.26.1
 DESTINSTALLPRIVLIB = $(DESTDIR)$(INSTALLPRIVLIB)
-INSTALLSITELIB = /usr/local/share/perl/5.22.1
+INSTALLSITELIB = /usr/local/Cellar/perl/5.26.1/lib/perl5/site_perl/5.26.1
 DESTINSTALLSITELIB = $(DESTDIR)$(INSTALLSITELIB)
-INSTALLVENDORLIB = /usr/share/perl5
+INSTALLVENDORLIB = 
 DESTINSTALLVENDORLIB = $(DESTDIR)$(INSTALLVENDORLIB)
-INSTALLARCHLIB = /usr/lib/x86_64-linux-gnu/perl/5.22
+INSTALLARCHLIB = /usr/local/Cellar/perl/5.26.1/lib/perl5/5.26.1/darwin-thread-multi-2level
 DESTINSTALLARCHLIB = $(DESTDIR)$(INSTALLARCHLIB)
-INSTALLSITEARCH = /usr/local/lib/x86_64-linux-gnu/perl/5.22.1
+INSTALLSITEARCH = /usr/local/Cellar/perl/5.26.1/lib/perl5/site_perl/5.26.1/darwin-thread-multi-2level
 DESTINSTALLSITEARCH = $(DESTDIR)$(INSTALLSITEARCH)
-INSTALLVENDORARCH = /usr/lib/x86_64-linux-gnu/perl5/5.22
+INSTALLVENDORARCH = 
 DESTINSTALLVENDORARCH = $(DESTDIR)$(INSTALLVENDORARCH)
-INSTALLBIN = /usr/bin
+INSTALLBIN = /usr/local/Cellar/perl/5.26.1/bin
 DESTINSTALLBIN = $(DESTDIR)$(INSTALLBIN)
-INSTALLSITEBIN = /usr/local/bin
+INSTALLSITEBIN = /usr/local/Cellar/perl/5.26.1/bin
 DESTINSTALLSITEBIN = $(DESTDIR)$(INSTALLSITEBIN)
-INSTALLVENDORBIN = /usr/bin
+INSTALLVENDORBIN = 
 DESTINSTALLVENDORBIN = $(DESTDIR)$(INSTALLVENDORBIN)
-INSTALLSCRIPT = /usr/bin
+INSTALLSCRIPT = /usr/local/Cellar/perl/5.26.1/bin
 DESTINSTALLSCRIPT = $(DESTDIR)$(INSTALLSCRIPT)
-INSTALLSITESCRIPT = /usr/local/bin
+INSTALLSITESCRIPT = /usr/local/Cellar/perl/5.26.1/bin
 DESTINSTALLSITESCRIPT = $(DESTDIR)$(INSTALLSITESCRIPT)
-INSTALLVENDORSCRIPT = /usr/bin
+INSTALLVENDORSCRIPT = 
 DESTINSTALLVENDORSCRIPT = $(DESTDIR)$(INSTALLVENDORSCRIPT)
-INSTALLMAN1DIR = /usr/share/man/man1
+INSTALLMAN1DIR = /usr/local/Cellar/perl/5.26.1/share/man/man1
 DESTINSTALLMAN1DIR = $(DESTDIR)$(INSTALLMAN1DIR)
-INSTALLSITEMAN1DIR = /usr/local/man/man1
+INSTALLSITEMAN1DIR = /usr/local/Cellar/perl/5.26.1/share/man/man1
 DESTINSTALLSITEMAN1DIR = $(DESTDIR)$(INSTALLSITEMAN1DIR)
-INSTALLVENDORMAN1DIR = /usr/share/man/man1
+INSTALLVENDORMAN1DIR = 
 DESTINSTALLVENDORMAN1DIR = $(DESTDIR)$(INSTALLVENDORMAN1DIR)
-INSTALLMAN3DIR = /usr/share/man/man3
+INSTALLMAN3DIR = /usr/local/Cellar/perl/5.26.1/share/man/man3
 DESTINSTALLMAN3DIR = $(DESTDIR)$(INSTALLMAN3DIR)
-INSTALLSITEMAN3DIR = /usr/local/man/man3
+INSTALLSITEMAN3DIR = /usr/local/Cellar/perl/5.26.1/share/man/man3
 DESTINSTALLSITEMAN3DIR = $(DESTDIR)$(INSTALLSITEMAN3DIR)
-INSTALLVENDORMAN3DIR = /usr/share/man/man3
+INSTALLVENDORMAN3DIR = 
 DESTINSTALLVENDORMAN3DIR = $(DESTDIR)$(INSTALLVENDORMAN3DIR)
-PERL_LIB = /usr/share/perl/5.22
-PERL_ARCHLIB = /usr/lib/x86_64-linux-gnu/perl/5.22
-PERL_ARCHLIBDEP = /usr/lib/x86_64-linux-gnu/perl/5.22
+PERL_LIB = /usr/local/Cellar/perl/5.26.1/lib/perl5/5.26.1
+PERL_ARCHLIB = /usr/local/Cellar/perl/5.26.1/lib/perl5/5.26.1/darwin-thread-multi-2level
+PERL_ARCHLIBDEP = /usr/local/Cellar/perl/5.26.1/lib/perl5/5.26.1/darwin-thread-multi-2level
 LIBPERL_A = libperl.a
 FIRST_MAKEFILE = Makefile
 MAKEFILE_OLD = Makefile.old
 MAKE_APERL_FILE = Makefile.aperl
 PERLMAINCC = $(CC)
-PERL_INC = /usr/lib/x86_64-linux-gnu/perl/5.22/CORE
-PERL_INCDEP = /usr/lib/x86_64-linux-gnu/perl/5.22/CORE
-PERL = "/usr/bin/perl"
-FULLPERL = "/usr/bin/perl"
+PERL_INC = /usr/local/Cellar/perl/5.26.1/lib/perl5/5.26.1/darwin-thread-multi-2level/CORE
+PERL_INCDEP = /usr/local/Cellar/perl/5.26.1/lib/perl5/5.26.1/darwin-thread-multi-2level/CORE
+PERL = "/usr/local/Cellar/perl/5.26.1/bin/perl"
+FULLPERL = "/usr/local/Cellar/perl/5.26.1/bin/perl"
 ABSPERL = $(PERL)
 PERLRUN = $(PERL)
 FULLPERLRUN = $(FULLPERL)
@@ -138,9 +138,9 @@ PERM_DIR = 755
 PERM_RW = 644
 PERM_RWX = 755
 
-MAKEMAKER   = /usr/share/perl/5.22/ExtUtils/MakeMaker.pm
-MM_VERSION  = 7.0401
-MM_REVISION = 70401
+MAKEMAKER   = /usr/local/Cellar/perl/5.26.1/lib/perl5/5.26.1/ExtUtils/MakeMaker.pm
+MM_VERSION  = 7.24
+MM_REVISION = 72400
 
 # FULLEXT = Pathname for extension directory (eg Foo/Bar/Oracle).
 # BASEEXT = Basename part of FULLEXT. May be just equal FULLEXT. (eg Oracle)
@@ -163,7 +163,7 @@ C_FILES  =
 O_FILES  = 
 H_FILES  = 
 MAN1PODS = 
-MAN3PODS = 
+MAN3PODS = lib/AE/HTTP/Request.pm
 
 # Where is the Config information that we are using/depend on
 CONFIGDEP = $(PERL_ARCHLIBDEP)$(DFSEP)Config.pm $(PERL_INCDEP)$(DFSEP)config.h
@@ -186,26 +186,16 @@ PERL_ARCHIVEDEP    =
 PERL_ARCHIVE_AFTER = 
 
 
-TO_INST_PM = lib/AE/HTTP_request.pm \
+TO_INST_PM = lib/AE/.DS_Store \
+	lib/AE/HTTP/Request.pm \
 	lib/AE/Simple.pm \
 	num0.pl \
 	num02.pl \
 	num2.pl
 
-PM_TO_BLIB = lib/AE/HTTP_request.pm \
-	blib/lib/AE/HTTP_request.pm \
-	lib/AE/Simple.pm \
-	blib/lib/AE/Simple.pm \
-	num0.pl \
-	$(INST_LIB)/AE/num0.pl \
-	num02.pl \
-	$(INST_LIB)/AE/num02.pl \
-	num2.pl \
-	$(INST_LIB)/AE/num2.pl
-
 
 # --- MakeMaker platform_constants section:
-MM_Unix_VERSION = 7.0401
+MM_Unix_VERSION = 7.24
 PERL_MALLOC_DEF = -DPERL_EXTMALLOC_DEF -Dmalloc=Perl_malloc -Dfree=Perl_mfree -Drealloc=Perl_realloc -Dcalloc=Perl_calloc
 
 
@@ -256,7 +246,7 @@ makemakerdflt : all
 
 
 # --- MakeMaker dist section:
-TAR = tar
+TAR = COPY_EXTENDED_ATTRIBUTES_DISABLE=1 COPYFILE_DISABLE=1 tar
 TARFLAGS = cvf
 ZIP = zip
 ZIPFLAGS = -r
@@ -296,14 +286,15 @@ DISTVNAME = AE-Simple-0.01
 
 PASTHRU = LIBPERL_A="$(LIBPERL_A)"\
 	LINKTYPE="$(LINKTYPE)"\
-	LD="$(LD)"\
-	PREFIX="$(PREFIX)"
+	PREFIX="$(PREFIX)"\
+	PASTHRU_DEFINE='$(DEFINE) $(PASTHRU_DEFINE)'\
+	PASTHRU_INC='$(INC) $(PASTHRU_INC)'
 
 
 # --- MakeMaker special_targets section:
 .SUFFIXES : .xs .c .C .cpp .i .s .cxx .cc $(OBJ_EXT)
 
-.PHONY: all config static dynamic test linkext manifest blibdirs clean realclean disttest distdir
+.PHONY: all config static dynamic test linkext manifest blibdirs clean realclean disttest distdir pure_all subdirs clean_subdirs makemakerdflt manifypods realclean_subdirs subdirs_dynamic subdirs_pure_nolink subdirs_static subdirs-test_dynamic subdirs-test_static test_dynamic test_static
 
 
 
@@ -320,8 +311,9 @@ PASTHRU = LIBPERL_A="$(LIBPERL_A)"\
 all :: pure_all manifypods
 	$(NOECHO) $(NOOP)
 
-
 pure_all :: config pm_to_blib subdirs linkext
+	$(NOECHO) $(NOOP)
+
 	$(NOECHO) $(NOOP)
 
 subdirs :: $(MYEXTLIB)
@@ -386,7 +378,7 @@ $(INST_MAN3DIR)$(DFSEP).exists :: Makefile.PL
 
 # --- MakeMaker linkext section:
 
-linkext :: $(LINKTYPE)
+linkext :: dynamic
 	$(NOECHO) $(NOOP)
 
 
@@ -400,7 +392,7 @@ BOOTSTRAP =
 
 # --- MakeMaker dynamic section:
 
-dynamic :: $(FIRST_MAKEFILE) $(BOOTSTRAP) $(INST_DYNAMIC)
+dynamic :: $(FIRST_MAKEFILE) config $(INST_BOOT) $(INST_DYNAMIC)
 	$(NOECHO) $(NOOP)
 
 
@@ -424,8 +416,10 @@ POD2MAN_EXE = $(PERLRUN) "-MExtUtils::Command::MM" -e pod2man "--"
 POD2MAN = $(POD2MAN_EXE)
 
 
-manifypods : pure_all 
-	$(NOECHO) $(NOOP)
+manifypods : pure_all config  \
+	lib/AE/HTTP/Request.pm
+	$(NOECHO) $(POD2MAN) --section=3 --perm_rw=$(PERM_RW) -u \
+	  lib/AE/HTTP/Request.pm $(INST_MAN3DIR)/AE::HTTP::Request.$(MAN3EXT) 
 
 
 
@@ -475,13 +469,14 @@ clean :: clean_subdirs
 
 
 # --- MakeMaker realclean_subdirs section:
-realclean_subdirs :
+# so clean is forced to complete before realclean_subdirs runs
+realclean_subdirs : clean
 	$(NOECHO) $(NOOP)
 
 
 # --- MakeMaker realclean section:
 # Delete temporary files (via clean) and also delete dist files
-realclean purge ::  clean realclean_subdirs
+realclean purge :: realclean_subdirs
 	- $(RM_F) \
 	  $(FIRST_MAKEFILE) $(MAKEFILE_OLD) 
 	- $(RM_RF) \
@@ -500,7 +495,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) 'configure_requires:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  ExtUtils::MakeMaker: '\''0'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'dynamic_config: 1' >> META_new.yml
-	$(NOECHO) $(ECHO) 'generated_by: '\''ExtUtils::MakeMaker version 7.0401, CPAN::Meta::Converter version 2.150005'\''' >> META_new.yml
+	$(NOECHO) $(ECHO) 'generated_by: '\''ExtUtils::MakeMaker version 7.24, CPAN::Meta::Converter version 2.150010'\''' >> META_new.yml
 	$(NOECHO) $(ECHO) 'license: unknown' >> META_new.yml
 	$(NOECHO) $(ECHO) 'meta-spec:' >> META_new.yml
 	$(NOECHO) $(ECHO) '  url: http://module-build.sourceforge.net/META-spec-v1.4.html' >> META_new.yml
@@ -521,7 +516,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '      "Nastena <nastena@>"' >> META_new.json
 	$(NOECHO) $(ECHO) '   ],' >> META_new.json
 	$(NOECHO) $(ECHO) '   "dynamic_config" : 1,' >> META_new.json
-	$(NOECHO) $(ECHO) '   "generated_by" : "ExtUtils::MakeMaker version 7.0401, CPAN::Meta::Converter version 2.150005",' >> META_new.json
+	$(NOECHO) $(ECHO) '   "generated_by" : "ExtUtils::MakeMaker version 7.24, CPAN::Meta::Converter version 2.150010",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "license" : [' >> META_new.json
 	$(NOECHO) $(ECHO) '      "unknown"' >> META_new.json
 	$(NOECHO) $(ECHO) '   ],' >> META_new.json
@@ -553,7 +548,7 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) '   },' >> META_new.json
 	$(NOECHO) $(ECHO) '   "release_status" : "stable",' >> META_new.json
 	$(NOECHO) $(ECHO) '   "version" : "0.01",' >> META_new.json
-	$(NOECHO) $(ECHO) '   "x_serialization_backend" : "JSON::PP version 2.27300"' >> META_new.json
+	$(NOECHO) $(ECHO) '   "x_serialization_backend" : "JSON::PP version 2.27400_02"' >> META_new.json
 	$(NOECHO) $(ECHO) '}' >> META_new.json
 	-$(NOECHO) $(MV) META_new.json $(DISTVNAME)/META.json
 
@@ -641,29 +636,29 @@ disttest : distdir
 
 
 # --- MakeMaker dist_ci section:
-
 ci :
-	$(PERLRUN) "-MExtUtils::Manifest=maniread" \
-	  -e "@all = keys %{ maniread() };" \
-	  -e "print(qq{Executing $(CI) @all\n}); system(qq{$(CI) @all});" \
-	  -e "print(qq{Executing $(RCS_LABEL) ...\n}); system(qq{$(RCS_LABEL) @all});"
+	$(ABSPERLRUN) -MExtUtils::Manifest=maniread -e '@all = sort keys %{ maniread() };' \
+	  -e 'print(qq{Executing $(CI) @all\n});' \
+	  -e 'system(qq{$(CI) @all}) == 0 or die $$!;' \
+	  -e 'print(qq{Executing $(RCS_LABEL) ...\n});' \
+	  -e 'system(qq{$(RCS_LABEL) @all}) == 0 or die $$!;' --
 
 
 # --- MakeMaker distmeta section:
 distmeta : create_distdir metafile
 	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'exit unless -e q{META.yml};' \
 	  -e 'eval { maniadd({q{META.yml} => q{Module YAML meta-data (added by MakeMaker)}}) }' \
-	  -e '    or print "Could not add META.yml to MANIFEST: $$$${'\''@'\''}\n"' --
+	  -e '    or die "Could not add META.yml to MANIFEST: $${'\''@'\''}"' --
 	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'exit unless -f q{META.json};' \
 	  -e 'eval { maniadd({q{META.json} => q{Module JSON meta-data (added by MakeMaker)}}) }' \
-	  -e '    or print "Could not add META.json to MANIFEST: $$$${'\''@'\''}\n"' --
+	  -e '    or die "Could not add META.json to MANIFEST: $${'\''@'\''}"' --
 
 
 
 # --- MakeMaker distsignature section:
-distsignature : create_distdir
+distsignature : distmeta
 	$(NOECHO) cd $(DISTVNAME) && $(ABSPERLRUN) -MExtUtils::Manifest=maniadd -e 'eval { maniadd({q{SIGNATURE} => q{Public-key signature (added by MakeMaker)}}) }' \
-	  -e '    or print "Could not add SIGNATURE to MANIFEST: $$$${'\''@'\''}\n"' --
+	  -e '    or die "Could not add SIGNATURE to MANIFEST: $${'\''@'\''}"' --
 	$(NOECHO) cd $(DISTVNAME) && $(TOUCH) SIGNATURE
 	cd $(DISTVNAME) && cpansign -s
 
@@ -696,7 +691,9 @@ doc__install : doc_site_install
 	$(NOECHO) $(ECHO) INSTALLDIRS not defined, defaulting to INSTALLDIRS=site
 
 pure_perl_install :: all
-	$(NOECHO) umask 022; $(MOD_INSTALL) \
+	$(NOECHO) $(MOD_INSTALL) \
+		read "$(PERL_ARCHLIB)/auto/$(FULLEXT)/.packlist" \
+		write "$(DESTINSTALLARCHLIB)/auto/$(FULLEXT)/.packlist" \
 		"$(INST_LIB)" "$(DESTINSTALLPRIVLIB)" \
 		"$(INST_ARCHLIB)" "$(DESTINSTALLARCHLIB)" \
 		"$(INST_BIN)" "$(DESTINSTALLBIN)" \
@@ -708,7 +705,7 @@ pure_perl_install :: all
 
 
 pure_site_install :: all
-	$(NOECHO) umask 02; $(MOD_INSTALL) \
+	$(NOECHO) $(MOD_INSTALL) \
 		read "$(SITEARCHEXP)/auto/$(FULLEXT)/.packlist" \
 		write "$(DESTINSTALLSITEARCH)/auto/$(FULLEXT)/.packlist" \
 		"$(INST_LIB)" "$(DESTINSTALLSITELIB)" \
@@ -721,7 +718,9 @@ pure_site_install :: all
 		"$(PERL_ARCHLIB)/auto/$(FULLEXT)"
 
 pure_vendor_install :: all
-	$(NOECHO) umask 022; $(MOD_INSTALL) \
+	$(NOECHO) $(MOD_INSTALL) \
+		read "$(VENDORARCHEXP)/auto/$(FULLEXT)/.packlist" \
+		write "$(DESTINSTALLVENDORARCH)/auto/$(FULLEXT)/.packlist" \
 		"$(INST_LIB)" "$(DESTINSTALLVENDORLIB)" \
 		"$(INST_ARCHLIB)" "$(DESTINSTALLVENDORARCH)" \
 		"$(INST_BIN)" "$(DESTINSTALLVENDORBIN)" \
@@ -731,30 +730,50 @@ pure_vendor_install :: all
 
 
 doc_perl_install :: all
-
-doc_site_install :: all
-	$(NOECHO) $(ECHO) Appending installation info to "$(DESTINSTALLSITEARCH)/perllocal.pod"
-	-$(NOECHO) umask 02; $(MKPATH) "$(DESTINSTALLSITEARCH)"
-	-$(NOECHO) umask 02; $(DOC_INSTALL) \
+	$(NOECHO) $(ECHO) Appending installation info to "$(DESTINSTALLARCHLIB)/perllocal.pod"
+	-$(NOECHO) $(MKPATH) "$(DESTINSTALLARCHLIB)"
+	-$(NOECHO) $(DOC_INSTALL) \
 		"Module" "$(NAME)" \
-		"installed into" $(INSTALLSITELIB) \
+		"installed into" "$(INSTALLPRIVLIB)" \
 		LINKTYPE "$(LINKTYPE)" \
 		VERSION "$(VERSION)" \
 		EXE_FILES "$(EXE_FILES)" \
-		>> "$(DESTINSTALLSITEARCH)/perllocal.pod"
+		>> "$(DESTINSTALLARCHLIB)/perllocal.pod"
+
+doc_site_install :: all
+	$(NOECHO) $(ECHO) Appending installation info to "$(DESTINSTALLARCHLIB)/perllocal.pod"
+	-$(NOECHO) $(MKPATH) "$(DESTINSTALLARCHLIB)"
+	-$(NOECHO) $(DOC_INSTALL) \
+		"Module" "$(NAME)" \
+		"installed into" "$(INSTALLSITELIB)" \
+		LINKTYPE "$(LINKTYPE)" \
+		VERSION "$(VERSION)" \
+		EXE_FILES "$(EXE_FILES)" \
+		>> "$(DESTINSTALLARCHLIB)/perllocal.pod"
 
 doc_vendor_install :: all
+	$(NOECHO) $(ECHO) Appending installation info to "$(DESTINSTALLARCHLIB)/perllocal.pod"
+	-$(NOECHO) $(MKPATH) "$(DESTINSTALLARCHLIB)"
+	-$(NOECHO) $(DOC_INSTALL) \
+		"Module" "$(NAME)" \
+		"installed into" "$(INSTALLVENDORLIB)" \
+		LINKTYPE "$(LINKTYPE)" \
+		VERSION "$(VERSION)" \
+		EXE_FILES "$(EXE_FILES)" \
+		>> "$(DESTINSTALLARCHLIB)/perllocal.pod"
 
 
 uninstall :: uninstall_from_$(INSTALLDIRS)dirs
 	$(NOECHO) $(NOOP)
 
 uninstall_from_perldirs ::
+	$(NOECHO) $(UNINSTALL) "$(PERL_ARCHLIB)/auto/$(FULLEXT)/.packlist"
 
 uninstall_from_sitedirs ::
 	$(NOECHO) $(UNINSTALL) "$(SITEARCHEXP)/auto/$(FULLEXT)/.packlist"
 
 uninstall_from_vendordirs ::
+	$(NOECHO) $(UNINSTALL) "$(VENDORARCHEXP)/auto/$(FULLEXT)/.packlist"
 
 
 # --- MakeMaker force section:
@@ -786,12 +805,13 @@ $(FIRST_MAKEFILE) : Makefile.PL $(CONFIGDEP)
 
 # --- MakeMaker makeaperl section ---
 MAP_TARGET    = perl
-FULLPERL      = "/usr/bin/perl"
+FULLPERL      = "/usr/local/Cellar/perl/5.26.1/bin/perl"
+MAP_PERLINC   = "-Iblib/arch" "-Iblib/lib" "-I/usr/local/Cellar/perl/5.26.1/lib/perl5/5.26.1/darwin-thread-multi-2level" "-I/usr/local/Cellar/perl/5.26.1/lib/perl5/5.26.1"
 
-$(MAP_TARGET) :: static $(MAKE_APERL_FILE)
+$(MAP_TARGET) :: $(MAKE_APERL_FILE)
 	$(MAKE) $(USEMAKEFILE) $(MAKE_APERL_FILE) $@
 
-$(MAKE_APERL_FILE) : $(FIRST_MAKEFILE) pm_to_blib
+$(MAKE_APERL_FILE) : static $(FIRST_MAKEFILE) pm_to_blib
 	$(NOECHO) $(ECHO) Writing \"$(MAKE_APERL_FILE)\" for this $(MAP_TARGET)
 	$(NOECHO) $(PERLRUNINST) \
 		Makefile.PL DIR="" \
@@ -800,7 +820,6 @@ $(MAKE_APERL_FILE) : $(FIRST_MAKEFILE) pm_to_blib
 
 
 # --- MakeMaker test section:
-
 TEST_VERBOSE=0
 TEST_TYPE=test_$(LINKTYPE)
 TEST_FILE = test.pl
@@ -808,51 +827,72 @@ TEST_FILES = t/*.t
 TESTDB_SW = -d
 
 testdb :: testdb_$(LINKTYPE)
-
-test :: $(TEST_TYPE) subdirs-test
-
-subdirs-test ::
 	$(NOECHO) $(NOOP)
 
+test :: $(TEST_TYPE)
+	$(NOECHO) $(NOOP)
 
-test_dynamic :: pure_all
+# Occasionally we may face this degenerate target:
+test_ : test_dynamic
+	$(NOECHO) $(NOOP)
+
+subdirs-test_dynamic :: dynamic pure_all
+
+test_dynamic :: subdirs-test_dynamic
 	PERL_DL_NONLAZY=1 $(FULLPERLRUN) "-MExtUtils::Command::MM" "-MTest::Harness" "-e" "undef *Test::Harness::Switches; test_harness($(TEST_VERBOSE), '$(INST_LIB)', '$(INST_ARCHLIB)')" $(TEST_FILES)
 
-testdb_dynamic :: pure_all
+testdb_dynamic :: dynamic pure_all
 	PERL_DL_NONLAZY=1 $(FULLPERLRUN) $(TESTDB_SW) "-I$(INST_LIB)" "-I$(INST_ARCHLIB)" $(TEST_FILE)
 
-test_ : test_dynamic
+subdirs-test_static :: static pure_all
 
-test_static :: test_dynamic
-testdb_static :: testdb_dynamic
+test_static :: subdirs-test_static
+	PERL_DL_NONLAZY=1 $(FULLPERLRUN) "-MExtUtils::Command::MM" "-MTest::Harness" "-e" "undef *Test::Harness::Switches; test_harness($(TEST_VERBOSE), '$(INST_LIB)', '$(INST_ARCHLIB)')" $(TEST_FILES)
+
+testdb_static :: static pure_all
+	PERL_DL_NONLAZY=1 $(FULLPERLRUN) $(TESTDB_SW) "-I$(INST_LIB)" "-I$(INST_ARCHLIB)" $(TEST_FILE)
+
 
 
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd :
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="$(VERSION)">' > $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    <ABSTRACT></ABSTRACT>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    <AUTHOR>Nastena &lt;nastena@&gt;</AUTHOR>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="x86_64-linux-gnu-thread-multi-5.22" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '</SOFTPKG>' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="AE-Simple" VERSION="0.01">' > AE-Simple.ppd
+	$(NOECHO) $(ECHO) '    <ABSTRACT></ABSTRACT>' >> AE-Simple.ppd
+	$(NOECHO) $(ECHO) '    <AUTHOR>Nastena &lt;nastena@&gt;</AUTHOR>' >> AE-Simple.ppd
+	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> AE-Simple.ppd
+	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="darwin-thread-multi-2level-5.26" />' >> AE-Simple.ppd
+	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> AE-Simple.ppd
+	$(NOECHO) $(ECHO) '    </IMPLEMENTATION>' >> AE-Simple.ppd
+	$(NOECHO) $(ECHO) '</SOFTPKG>' >> AE-Simple.ppd
 
 
 # --- MakeMaker pm_to_blib section:
 
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
-	  lib/AE/HTTP_request.pm blib/lib/AE/HTTP_request.pm \
-	  lib/AE/Simple.pm blib/lib/AE/Simple.pm \
-	  num0.pl $(INST_LIB)/AE/num0.pl \
-	  num02.pl $(INST_LIB)/AE/num02.pl \
-	  num2.pl $(INST_LIB)/AE/num2.pl 
+	  'lib/AE/.DS_Store' 'blib/lib/AE/.DS_Store' \
+	  'lib/AE/HTTP/Request.pm' 'blib/lib/AE/HTTP/Request.pm' \
+	  'lib/AE/Simple.pm' 'blib/lib/AE/Simple.pm' \
+	  'num0.pl' '$(INST_LIB)/AE/num0.pl' \
+	  'num02.pl' '$(INST_LIB)/AE/num02.pl' \
+	  'num2.pl' '$(INST_LIB)/AE/num2.pl' 
 	$(NOECHO) $(TOUCH) pm_to_blib
 
 
 # --- MakeMaker selfdocument section:
+
+# here so even if top_targets is overridden, these will still be defined
+# gmake will silently still work if any are .PHONY-ed but nmake won't
+
+static ::
+	$(NOECHO) $(NOOP)
+
+dynamic ::
+	$(NOECHO) $(NOOP)
+
+config ::
+	$(NOECHO) $(NOOP)
 
 
 # --- MakeMaker postamble section:

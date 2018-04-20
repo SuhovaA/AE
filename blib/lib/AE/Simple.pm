@@ -43,6 +43,7 @@ sub new {
 		get_fh_w => $arr_w,
 		get_fh_e => $arr_e,
 		deadlines => my $deadlines,
+		end_loop => 0,
 	}, $class;
 	return $self;
 }
@@ -110,6 +111,12 @@ sub ready_fds_e {
 	return @map;
 }
 
+sub end_loop {
+	my $self = shift;
+	$self->{end_loop} = 1;
+	return 0;
+}
+
 sub timer {
 	my ($self, $t, $cb) = @_;
 	my $deadline = time + $t;
@@ -126,6 +133,7 @@ sub run_loop {
 	my $ein;
 
 	while (1) {
+		last if $self->{end_loop} == 1;
 
 		$rin = $self->{rin};
 		$win = $self->{win};
@@ -136,6 +144,7 @@ sub run_loop {
 		print " write: ", unpack "B*", $win;
 		print " ein: ", unpack "B*", $rin;
 		print "\n";
+
 		if ($nfound) {
 			#my %waiters = %{ $self->{wait} };
 			#say "rin: ", ready_fds_r($self, $rin);
@@ -169,7 +178,7 @@ sub run_loop {
 		    	$self->{deadlines} = \@deadlines;
 			}
 		}
-		sleep(3)
+		sleep(2)
 	}
 }
 
