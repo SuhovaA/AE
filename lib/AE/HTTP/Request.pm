@@ -1,4 +1,5 @@
 package AE::HTTP::Request;
+ 
 
 use 5.016;
 use warnings;
@@ -96,15 +97,18 @@ sub new ($$$$;$){
 				sysread($sock, my $buf, 1024);
 				$response .= $buf;
 				#say $buf;
+
 				if ($buf =~/\015\12\015\012/) {
 
 					$obj->destroy($r);
-					my $n1 = index($response, "\n");
-					my $n2 = index($response, "\n\n");
-					my $status_line = substr($response, 0, $n1);
+
+					my $x = "\015\012";
+					$response =~ /^([^$x]+)(($x[^$x]+)*)$x$x(.*)/s;
+					my $status_line = $1;
+					my $h = substr($2, 2);
+					my $buf = $4;
+					
 					$results{'status-line'} = $status_line;
-					#say $status_line;
-					my $h = substr($response, $n1 + 1, $n2 - $n1 - 1);
 					my $headers = HTTP::Easy::Headers->decode($h);
 					$results{headers} = $headers;
 					#p $headers;
@@ -115,32 +119,78 @@ sub new ($$$$;$){
 						#$arg{cookie}{$_} = $cookie_jar->{$_};
 					#}
 					$results{cookie} = $cookie_jar;
-					$r_arg->{cookie} = $cookie_jar;
+					$r_arg->{cookie} = $cookie_jar;#чтоб изменилось извне
 					
-					if (defined $headers->{'content-length'} && $headers->{'content-length'} > 0) {
+					#my $buf = substr($response, $n2 + 2);
 
-						my $body = substr($response, $n2 + 2);
-						if (length($body) < $headers->{'content-length'}) {
-							my $p;
-							$p = $obj->io($sock, "r", sub {
-								sysread($sock, my $buf, $headers->{'content-length'} - length($body) );
-								$body .= $buf;
-								#say $body;
-								if (length($body) == $headers->{'content-length'}) {
-									$obj->destroy($p);
-									$results{body} = $body;
-									#p $body
-									$obj->end_loop();
-								}
-							});
+					
+					my $body;
+					if (defined $headers->{'content-length'}) {
+						if ($headers->{'content-length'} > 0) {
+							$body = $buf;
+							if (length($body) < $headers->{'content-length'}) {
+								my $p;
+								$p = $obj->io($sock, "r", sub {
+									sysread($sock, my $buf, $headers->{'content-length'} - length($body) + 1);
+									$body .= $buf;
+									#say $buf;
+									if (length($body) == $headers->{'content-length'}) {
+										$obj->destroy($p);
+										$results{body} = $body;
+										$obj->end_loop();
+									}
+								});
+							} else {
+								$results{body} = $body;
+								$obj->end_loop();
+							}
 						} else {
-							$results{body} = $body;
+							$results{body} = "";
 							$obj->end_loop();
 						}
-					} else {
-						$obj->end_loop();
 					}
+					my $n;
+					if (defined $headers->{'transfer-encoding'} && ($headers->{'transfer-encoding'} eq 'chunked')) {
+						my $x = "\r\n";
+						$buf =~ /^([^$x]+)/;
+						#say ">>>>", $buf;
+						$n = hex($1);
+						#say $n;
+						$buf = substr($buf, length($1) + 2);
+						my $p;
+						
+						$body = "";
+						$p = $obj->io($sock, "r", sub {
+							if ($n == 0) {
+								$obj->destroy($p);
+								$results{body} = $body;
+								$obj->end_loop();
+							} else {
+								if (length($buf) < $n) {
+									sysread($sock, my $tmp, $n - length($buf) + 5);
+									$buf .= $tmp;
+									#say ">>>>", $buf;
+								}
+								$body .= substr($buf, 0, $n);
+								$buf = substr($buf, $n + 2);
+								#say ">>>>>", $buf;
+								if ($buf =~ /^([^$x]+)$x/) {
+									$n = hex($1);
+									$buf = substr($buf, length($1) + 2);
+								} else {
+									sysread($sock, my $tmp, 15);
+									$buf .= $tmp;
+									$buf =~ /^([^$x]+)$x/;
+									$n = hex($1);
+									$buf = substr($buf, length($1) + 2);
+								}
+								#say $n;
+							}
+						});
+					}
+
 				}
+				
 			});
 		}
 	});

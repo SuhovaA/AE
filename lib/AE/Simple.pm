@@ -178,7 +178,7 @@ sub run_loop {
 		    	$self->{deadlines} = \@deadlines;
 			}
 		}
-		sleep(2)
+		sleep(1);
 	}
 }
 
