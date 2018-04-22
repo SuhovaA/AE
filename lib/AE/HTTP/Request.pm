@@ -115,13 +115,9 @@ sub new ($$$$;$){
 					#p $headers->{'set-cookie'};
 
 					my $cookie_jar = HTTP::Easy::Cookies->decode($headers->{'set-cookie'});
-					#for (keys %$cookie_jar) {
-						#$arg{cookie}{$_} = $cookie_jar->{$_};
-					#}
 					$results{cookie} = $cookie_jar;
 					$r_arg->{cookie} = $cookie_jar;#чтоб изменилось извне
 					
-					#my $buf = substr($response, $n2 + 2);
 
 					
 					my $body;
@@ -148,9 +144,8 @@ sub new ($$$$;$){
 							$results{body} = "";
 							$obj->end_loop();
 						}
-					}
-					my $n;
-					if (defined $headers->{'transfer-encoding'} && ($headers->{'transfer-encoding'} eq 'chunked')) {
+					} elsif (defined $headers->{'transfer-encoding'} && ($headers->{'transfer-encoding'} eq 'chunked')) {
+						my $n;
 						my $x = "\r\n";
 						$buf =~ /^([^$x]+)/;
 						#say ">>>>", $buf;
@@ -161,7 +156,7 @@ sub new ($$$$;$){
 						
 						$body = "";
 						$p = $obj->io($sock, "r", sub {
-							if ($n == 0) {
+							if (!$n) {
 								$obj->destroy($p);
 								$results{body} = $body;
 								$obj->end_loop();
@@ -187,8 +182,21 @@ sub new ($$$$;$){
 								#say $n;
 							}
 						});
+					} else {
+						#просто считываем пока читается, до закрытия соединения или пока там что-то есть
+						my $s;
+						$s = $obj->io($sock, "r", sub {
+							$body = $buf;
+							my $read = sysread($sock, my $tmp, 10000);
+							if ($read) {
+								$body .= $buf;
+							} else {
+								$obj->destroy($s);
+								$results{body} = $body;
+								$obj->end_loop();
+							}
+						});
 					}
-
 				}
 				
 			});
