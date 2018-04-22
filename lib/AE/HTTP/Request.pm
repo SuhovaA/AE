@@ -55,11 +55,9 @@ sub tcp_connect {
 sub new ($$$$;$){
 
 	my ($self, $host, $port, $method, $uri, $r_arg) = @_;
-	#my %arg = %$r_arg;
 	my $sock = tcp_connect($host, $port);
 
 	$method = uc $method;
-	
 
 	my %hdr;
 	if (my $hdr = $r_arg->{headers}) {
@@ -73,12 +71,8 @@ sub new ($$$$;$){
             . "\015\012"
             . $r_arg->{body};
     
-    #say "request: ", $request;
 
 	$hdr{cookie} = HTTP::Easy::Cookies->encode($r_arg->{cookie}, host => $host, path => $uri);
-	#say $hdr{cookie};
-
-	
 
 	my $obj = AE::Simple->new();
 	my $w;
@@ -100,8 +94,7 @@ sub new ($$$$;$){
 
 				sysread($sock, my $buf, 1024);
 				$response .= $buf;
-				#say $buf;
-
+			
 				if ($buf =~/\015\12\015\012/) {
 
 					$obj->destroy($r);
@@ -115,14 +108,10 @@ sub new ($$$$;$){
 					$results{'status-line'} = $status_line;
 					my $headers = HTTP::Easy::Headers->decode($h);
 					$results{headers} = $headers;
-					#p $headers;
-					#p $headers->{'set-cookie'};
-
+				
 					my $cookie_jar = HTTP::Easy::Cookies->decode($headers->{'set-cookie'});
 					$results{cookie} = $cookie_jar;
-					$r_arg->{cookie} = $cookie_jar;#чтоб изменилось извне
-					
-
+					$r_arg->{cookie} = $cookie_jar;
 					
 					my $body;
 					if (defined $headers->{'content-length'}) {
@@ -133,7 +122,6 @@ sub new ($$$$;$){
 								$p = $obj->io($sock, "r", sub {
 									sysread($sock, my $buf, $headers->{'content-length'} - length($body) + 1);
 									$body .= $buf;
-									#say $buf;
 									if (length($body) == $headers->{'content-length'}) {
 										$obj->destroy($p);
 										$results{body} = $body;
@@ -152,9 +140,7 @@ sub new ($$$$;$){
 						my $n;
 						my $x = "\r\n";
 						$buf =~ /^([^$x]+)/;
-						#say ">>>>", $buf;
 						$n = hex($1);
-						#say $n;
 						$buf = substr($buf, length($1) + 2);
 						my $p;
 						
@@ -168,11 +154,9 @@ sub new ($$$$;$){
 								if (length($buf) < $n) {
 									sysread($sock, my $tmp, $n - length($buf) + 5);
 									$buf .= $tmp;
-									#say ">>>>", $buf;
 								}
 								$body .= substr($buf, 0, $n);
 								$buf = substr($buf, $n + 2);
-								#say ">>>>>", $buf;
 								if ($buf =~ /^([^$x]+)$x/) {
 									$n = hex($1);
 									$buf = substr($buf, length($1) + 2);
@@ -183,11 +167,9 @@ sub new ($$$$;$){
 									$n = hex($1);
 									$buf = substr($buf, length($1) + 2);
 								}
-								#say $n;
 							}
 						});
 					} else {
-						#просто считываем пока читается, до закрытия соединения или пока там что-то есть
 						my $s;
 						$s = $obj->io($sock, "r", sub {
 							$body = $buf;
