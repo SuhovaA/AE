@@ -27,9 +27,10 @@ our $VERSION = '0.01';
 =head1 SYNOPSIS
 
 	AE::HTTP::Request->new($host, $method, $uri, %arg)
-	%arg = { headers = %headers,
-			body = $body,
-			}
+	%arg = { headers = \%headers,
+		cookie = \%cookie,
+		body = $body,
+	}
 
 =cut
 
