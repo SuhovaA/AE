@@ -26,12 +26,15 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-	AE::HTTP::Request->new($host, $method, $uri, %arg)
+	$response = AE::HTTP::Request->new($host, $method, $uri, %arg)
 	%arg = { headers = \%headers,
 		cookie = \%cookie,
 		body = $body,
 	}
-
+	p $response->{'status-line'}; 
+	p $response->{headers};
+	p $response->{body};
+	p $response->{cookie};
 =cut
 
 sub tcp_connect {
