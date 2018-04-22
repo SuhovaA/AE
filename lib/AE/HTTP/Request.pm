@@ -26,7 +26,7 @@ our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
-	$response = AE::HTTP::Request->new($host, $port, $method, $uri, %arg)
+	$response = AE::HTTP::Request->new($host, $port, $method, $uri, \%arg)
 	%arg = { headers = \%headers,
 		cookie = \%cookie,
 		body = $body,
