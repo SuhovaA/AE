@@ -37,12 +37,26 @@ our $VERSION = '0.01';
 	p $response->{cookie};
 =cut
 
+our @hdrs  = (
+	qw(Upgrade),
+	qw(Accept Accept-Charset Accept-Encoding Accept-Language Accept-Ranges),
+  qw(Allow Authorization Cache-Control Connection Content-Disposition),
+  qw(Content-Encoding Content-Length Content-Range Content-Type Cookie DNT),
+  qw(Date ETag Expect Expires Host If-Modified-Since Last-Modified Link),
+  qw(Location Origin Proxy-Authenticate Proxy-Authorization Range),
+  qw(WebSocket-Origin WebSocket-Location Sec-WebSocket-Origin Sec-Websocket-Location ),
+  qw(Sec-WebSocket-Accept Sec-WebSocket-Extensions Sec-WebSocket-Key),
+  qw(Sec-WebSocket-Protocol Sec-WebSocket-Version Server Set-Cookie Status),
+  qw(TE Trailer Transfer-Encoding Upgrade User-Agent Vary WWW-Authenticate),
+  qw(X-Requested-With),
+);
+
 sub tcp_connect {
 	my ($host, $port) = @_;
 	my $proto = getprotobyname("tcp");
-	socket(my $sock, AF_INET, SOCK_STREAM, $proto) or warn "Error: socket";
+	socket(my $sock, AF_INET, SOCK_STREAM, $proto) or die "Error: socket";
 	#say $host, $port;
-	my $addr = gethostbyname $host;
+	my $addr = gethostbyname $host or die "Problems with host: $host";
 
 	my $sa = sockaddr_in($port, $addr);
 	my $flags = fcntl($sock, F_GETFL, 0) or die "Can't get flags for the socket: $!\n";
@@ -65,6 +79,10 @@ sub new ($$$$;$){
 			$hdr{lc $k} = $v;
 		}
 	}
+
+	die "http port: 80, but \$port = $port" if $port != 80;
+	die "There is no such method: $method" if $method !~ /options|get|head|post|put|patch|delete|trace|connect/i;
+	for my $h (keys %hdr) { die "There is no such headers: \"$h\" " if  (!grep /$h/i, @hdrs); }
 
 	my $request = "$method $uri HTTP/1.1\015\012"
             . (join "", map "$_: $hdr{$_}\015\012", keys %hdr)

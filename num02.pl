@@ -5,10 +5,10 @@ use AE::Simple;
 use AE::HTTP::Request;
 use DDP;
 
-my $method = 'GET';
+my $method = 'GEt';
 my $uri = '/';
 my %arg;
-$arg{'headers'} = {host => 'www.perlmonks.org'};
+$arg{'headers'} = {host => 'www.perlmonks.org', hhh => 'asas'};
 $arg{'body'} = '';
 $arg{'cookie'} = {version => '1'};
 
