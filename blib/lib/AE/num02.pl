@@ -1,23 +1,35 @@
 use 5.016;
 use warnings;
 use lib './lib';
-use AE::Simple;
-use AE::HTTP::Request;
+use AE::Simple2;
+#use AE::HTTP::Request;
 use DDP;
 
-my $method = 'get';
-my $uri = '/webhp?hl=ru&sa=X&ved=0ahUKEwiuz8mW-sPaAhVI8ywKHQ06BhkQPAgD';
+
 my %arg;
-$arg{'headers'} = ();
-$arg{'body'} = "";
-$arg{'cookie'} = ();
+$arg{'headers'} = {};
+$arg{'body'} = '';
+$arg{'cookie'} = {version => '1'};
 
-my $response = AE::HTTP::Request->new("www.google.ru", 80, $method, $uri, \%arg);
+#my $response = AE::HTTP::Request->new("get", 'http://www.google.ru', \%arg);
 
-$response = AE::HTTP::Request->new("www.google.ru", 80, $method, $uri, \%arg);
+my $obj = AE::Simple2->new();
+my %results = ();
+my $response;
+$response = $obj->http_request("get", 'http://www.google.ru', \%arg, \%results, sub { 
+	$obj->end_loop();
+	p $response->{'status-line'};
+	p $response->{'headers'};
+	p $response->{'body'};
+	#p $response->{'cookie'};
+	p %arg;
+});
 
-p $response->{'status-line'};
-p $response->{'headers'};
-p $response->{'body'};
+$obj->run_loop();
+
+#$response = AE::HTTP::Request->new("www.google.ru", 80, $method, $uri, \%arg);
+#p $response->{'status-line'};
+#p $response->{'headers'};
+#p $response->{'body'};
 #p $response->{'cookie'};
-p %arg;
+#p %arg;

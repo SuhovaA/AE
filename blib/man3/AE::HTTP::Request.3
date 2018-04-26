@@ -67,16 +67,21 @@
 .\" ========================================================================
 .\"
 .IX Title "AE::HTTP::Request 3"
-.TH AE::HTTP::Request 3 "2018-04-18" "perl v5.26.1" "User Contributed Perl Documentation"
+.TH AE::HTTP::Request 3 "2018-04-26" "perl v5.26.1" "User Contributed Perl Documentation"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "SYNOPSIS"
 .IX Header "SYNOPSIS"
-.Vb 4
-\&        AE::HTTP::Request\->new($host, $method, $uri, %arg)
-\&        %arg = { headers = %headers,
-\&                        body = $body,
-\&                        }
+.Vb 9
+\&        $response = AE::HTTP::Request\->new($method, $url, \e%arg)
+\&        %arg = { headers = \e%headers,
+\&                cookie = \e%cookie,
+\&                body = $body,
+\&        }
+\&        p $response\->{\*(Aqstatus\-line\*(Aq}; 
+\&        p $response\->{headers};
+\&        p $response\->{body};
+\&        p $response\->{cookie};
 .Ve

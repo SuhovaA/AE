@@ -1,9 +1,16 @@
-package AE::Simple;
+package AE::Simple2;
 
 use 5.016000;
 use strict;
 use warnings;
 use lib './blib';
+
+use IO::Select;
+use Socket;
+use Fcntl;
+use HTTP::Easy::Headers;
+use HTTP::Easy::Cookies;
+use DDP;
 
 require Exporter;
 use AutoLoader qw(AUTOLOAD);
@@ -14,8 +21,6 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(
 );
 our $VERSION = '0.01';
-
-use IO::Select;
 
 sub new {
 	my $class = shift;

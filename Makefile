@@ -186,9 +186,9 @@ PERL_ARCHIVEDEP    =
 PERL_ARCHIVE_AFTER = 
 
 
-TO_INST_PM = lib/AE/.DS_Store \
-	lib/AE/HTTP/Request.pm \
+TO_INST_PM = lib/AE/HTTP/Request.pm \
 	lib/AE/Simple.pm \
+	lib/AE/Simple2.pm \
 	num0.pl \
 	num02.pl \
 	num2.pl
@@ -871,9 +871,9 @@ ppd :
 
 pm_to_blib : $(FIRST_MAKEFILE) $(TO_INST_PM)
 	$(NOECHO) $(ABSPERLRUN) -MExtUtils::Install -e 'pm_to_blib({@ARGV}, '\''$(INST_LIB)/auto'\'', q[$(PM_FILTER)], '\''$(PERM_DIR)'\'')' -- \
-	  'lib/AE/.DS_Store' 'blib/lib/AE/.DS_Store' \
 	  'lib/AE/HTTP/Request.pm' 'blib/lib/AE/HTTP/Request.pm' \
 	  'lib/AE/Simple.pm' 'blib/lib/AE/Simple.pm' \
+	  'lib/AE/Simple2.pm' 'blib/lib/AE/Simple2.pm' \
 	  'num0.pl' '$(INST_LIB)/AE/num0.pl' \
 	  'num02.pl' '$(INST_LIB)/AE/num02.pl' \
 	  'num2.pl' '$(INST_LIB)/AE/num2.pl' 
